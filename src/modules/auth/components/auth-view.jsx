@@ -85,20 +85,20 @@ export default class AuthView extends Component {
             </div>
           }
           {s.selectedNav === AUTH_LOGIN &&
-             <div className="default-auth">
-              <button
-                className="auth-ledger unstyled"
-                onClick={p.authAirbitz.airbitzLoginLink.onClick}
-              >
-                <div>
-                  <LedgerLogoIcon />
-                  <span>
-                    Login with Ledger
-                  </span>
-                </div>
-              </button>
-              <h4>or</h4>
+          <div className="default-auth">
+            <button
+              className="auth-ledger unstyled"
+              onClick={p.authAirbitz.airbitzLoginLink.onClick}
+            >
+              <div>
+                <LedgerLogoIcon />
+                <span>
+                  Login with Ledger
+                </span>
               </div>
+            </button>
+            <h4>or</h4>
+            </div>
           }
           {s.selectedNav === AUTH_SIGNUP &&
             <AuthSignup {...p.authSignup} />
