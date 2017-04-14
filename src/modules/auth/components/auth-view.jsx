@@ -4,6 +4,7 @@ import AuthLogin from 'modules/auth/components/auth-login';
 import AuthSignup from 'modules/auth/components/auth-signup';
 import AuthImport from 'modules/auth/components/auth-import';
 import AirbitzLogoIcon from 'modules/common/components/airbitz-logo-icon';
+import LedgerLogoIcon from 'modules/common/components/ledger-logo-icon';
 
 import ComponentNav from 'modules/common/components/component-nav';
 
@@ -82,6 +83,22 @@ export default class AuthView extends Component {
               </button>
               <h4>or</h4>
             </div>
+          }
+          {s.selectedNav === AUTH_LOGIN &&
+             <div className="default-auth">
+              <button
+                className="auth-ledger unstyled"
+                onClick={p.authAirbitz.airbitzLoginLink.onClick}
+              >
+                <div>
+                  <LedgerLogoIcon />
+                  <span>
+                    Login with Ledger
+                  </span>
+                </div>
+              </button>
+              <h4>or</h4>
+              </div>
           }
           {s.selectedNav === AUTH_SIGNUP &&
             <AuthSignup {...p.authSignup} />

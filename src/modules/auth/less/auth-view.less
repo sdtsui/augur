@@ -71,7 +71,7 @@
       flex-direction: column;
     }
 
-    .auth-airbitz {
+    .auth-airbitz, .auth-ledger {
       align-self: center;
       background-color: @color-airbitz-logo-background;
       border-radius: 4px;
@@ -83,9 +83,8 @@
         align-items: center;
         display: flex;
 
-        .airbitz-logo-icon {
+        .airbitz-logo-icon, .ledger-logo-icon {
           .border(true, @border-right, @color-gray);
-
           height: @font-size-large;
           padding: 0.6em;
         }
