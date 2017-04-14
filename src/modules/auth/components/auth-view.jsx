@@ -6,13 +6,14 @@ import AuthImport from 'modules/auth/components/auth-import';
 import AirbitzLogoIcon from 'modules/common/components/airbitz-logo-icon';
 import LedgerLogoIcon from 'modules/common/components/ledger-logo-icon';
 
+import { ModalContainer, ModalDialog } from 'react-modal-dialog';
 import ComponentNav from 'modules/common/components/component-nav';
 
 import { AUTH_SIGNUP, AUTH_LOGIN, AUTH_IMPORT } from 'modules/app/constants/views';
 
 export default class AuthView extends Component {
   static propTypes = {
-    authAirbitz: PropTypes.object
+    authAirbitz: PropTypes.object,
   }
 
   constructor(props) {
@@ -28,6 +29,29 @@ export default class AuthView extends Component {
     this.updateSelectedAuthMethod = this.updateSelectedAuthMethod.bind(this);
     this.updateSelectedLoginIDMethod = this.updateSelectedLoginIDMethod.bind(this);
   }
+
+  handleModalClose = () => {
+    this.setState({
+      isShowingQRCodeModal: false,
+      isShowingPasswordInputModal: false
+    });
+  };
+
+  handleModalOpenDeposit = () => {
+    this.setState({
+      isShowingQRCodeModal: true,
+      size: 300,
+      message: 'Ether / REP Deposit Address',
+    });
+  };
+
+  handleModalOpenTransfer = () => {
+    this.setState({
+      isShowingQRCodeModal: true,
+      size: 300,
+      message: 'Your Account Keystore Data',
+    });
+  };
 
   componentDidMount() {
     this.props.authAirbitz.airbitzOnLoad.onLoad();
@@ -88,15 +112,24 @@ export default class AuthView extends Component {
           <div className="default-auth">
             <button
               className="auth-ledger unstyled"
-              onClick={p.authAirbitz.airbitzLoginLink.onClick}
+              onClick={this.handleModalOpenTransfer}
             >
               <div>
                 <LedgerLogoIcon />
                 <span>
-                  Login with Ledger
+                    Login with Ledger
                 </span>
-              </div>
-            </button>
+                {s.isShowingQRCodeModal &&
+                <ModalContainer onClose={this.handleModalClose}>
+                  <ModalDialog onClose={this.handleModalClose}>
+                    <h1>
+                      HEY
+                    </h1>
+                  </ModalDialog>
+                </ModalContainer>
+                }
+              </div>  
+              </button>  
             <h4>or</h4>
             </div>
           }
