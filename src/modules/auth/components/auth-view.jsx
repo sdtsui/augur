@@ -3,6 +3,7 @@ import React, { Component, PropTypes } from 'react';
 import AuthLogin from 'modules/auth/components/auth-login';
 import AuthSignup from 'modules/auth/components/auth-signup';
 import AuthImport from 'modules/auth/components/auth-import';
+import AuthLedgerLogin from 'modules/auth/components/auth-ledger-login';
 import AirbitzLogoIcon from 'modules/common/components/airbitz-logo-icon';
 import LedgerLogoIcon from 'modules/common/components/ledger-logo-icon';
 
@@ -30,32 +31,24 @@ export default class AuthView extends Component {
     this.updateSelectedLoginIDMethod = this.updateSelectedLoginIDMethod.bind(this);
   }
 
-  handleModalClose = () => {
-    this.setState({
-      isShowingQRCodeModal: false,
-      isShowingPasswordInputModal: false
-    });
-  };
-
-  handleModalOpenDeposit = () => {
-    this.setState({
-      isShowingQRCodeModal: true,
-      size: 300,
-      message: 'Ether / REP Deposit Address',
-    });
-  };
-
-  handleModalOpenTransfer = () => {
-    this.setState({
-      isShowingQRCodeModal: true,
-      size: 300,
-      message: 'Your Account Keystore Data',
-    });
-  };
-
   componentDidMount() {
     this.props.authAirbitz.airbitzOnLoad.onLoad();
   }
+
+  handleModalClose = () => {
+    this.setState({
+      isShowingModal: false,
+    });
+  };
+
+  ledgerStepOne = () => {
+    this.setState({
+      isShowingModal: true,
+      title: 'No Ledger detcted',
+      message: 'Please connect a Ledger to continue.'
+
+    });
+  };
 
   updateSelectedNav(selectedNav) {
     this.setState({ selectedNav });
@@ -108,28 +101,30 @@ export default class AuthView extends Component {
               <h4>or</h4>
             </div>
           }
-          {s.selectedNav === AUTH_LOGIN &&
+          {s.selectedNav !== AUTH_IMPORT && s.selectedNav !== AUTH_SIGNUP &&
           <div className="default-auth">
             <button
               className="auth-ledger unstyled"
-              onClick={this.handleModalOpenTransfer}
+              onClick={this.ledgerStepOne}
             >
               <div>
                 <LedgerLogoIcon />
                 <span>
                     Login with Ledger
                 </span>
-                {s.isShowingQRCodeModal &&
-                <ModalContainer onClose={this.handleModalClose}>
-                  <ModalDialog onClose={this.handleModalClose}>
-                    <h1>
-                      HEY
-                    </h1>
-                  </ModalDialog>
-                </ModalContainer>
-                }
-              </div>  
-              </button>  
+              </div>
+              {s.isShowingModal &&
+              <ModalContainer onClose={this.handleModalClose}>
+                <ModalDialog onClose={this.handleModalClose}>
+                  <h1
+                    className="ledgerModal"
+                  >
+                    <AuthLedgerLogin {...p.authLedgerLogin} />
+                  </h1>
+                </ModalDialog>
+              </ModalContainer>
+              }
+            </button>
             <h4>or</h4>
             </div>
           }
