@@ -40,6 +40,7 @@ export default class Routes extends Component {
       case AUTHENTICATION:
         viewProps = {
           authLogin: p.authLogin,
+          authLedgerLogin: p.authLedgerLogin,
           authAirbitz: p.authAirbitz,
           authSignup: p.authSignup,
           authImport: p.authImport,
