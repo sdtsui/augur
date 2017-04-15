@@ -32,6 +32,7 @@ import { OUTCOME_TRADE_NAV_ITEMS } from 'modules/outcomes/constants/outcome-trad
 import authAirbitz from 'modules/auth/selectors/auth-airbitz';
 import authNavItems from 'modules/auth/selectors/auth-nav-items';
 import authLogin from 'modules/auth/selectors/auth-login';
+import authLedgerLogin from 'modules/auth/selectors/auth-ledger-login';
 import authSignup from 'modules/auth/selectors/auth-signup';
 import authImport from 'modules/auth/selectors/auth-import';
 import closePositionStatus from 'modules/my-positions/selectors/close-position-status';
@@ -72,6 +73,7 @@ const selectors = {
   authAirbitz,
   authNavItems,
   authLogin,
+  authLedgerLogin,
   authSignup,
   authImport,
   closePositionStatus,
